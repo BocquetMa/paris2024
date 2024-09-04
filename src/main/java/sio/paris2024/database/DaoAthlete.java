@@ -5,6 +5,7 @@
 package sio.paris2024.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class DaoAthlete {
         
         ArrayList<Athlete> lesAthletes = new ArrayList<Athlete>();
         try{
-            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom,  p.id as p_id, p.nom as p_nom " +
+            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_dateNaiss,  p.id as p_id, p.nom as p_nom " +
                          " from athlete a inner join pays p " +
                          " on a.pays_id = p.id ");
             //System.out.println("REQ="+ requeteSql);
@@ -37,6 +38,10 @@ public class DaoAthlete {
                 Athlete a = new Athlete();
                    a.setId(resultatRequete.getInt("a_id"));
                    a.setNom(resultatRequete.getString("a_nom"));
+                   a.setPrenom(resultatRequete.getString("a_prenom"));
+                   
+                   Date date = resultatRequete.getDate("a_dateNaiss");
+                   a.setDateNaiss(date.toLocalDate());
                     
                    Pays p = new Pays();
                    p.setId(resultatRequete.getInt("p_id"));
@@ -59,7 +64,7 @@ public class DaoAthlete {
         
         Athlete a = new Athlete();
         try{
-            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom,  p.id as p_id, p.nom as p_nom " +
+            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_dateNaiss,  p.id as p_id, p.nom as p_nom " +
                          " from athlete a inner join pays p " +
                          " on a.pays_id = p.id " + 
                          " where a.id = ? ");
@@ -71,12 +76,16 @@ public class DaoAthlete {
                 
                    a.setId(resultatRequete.getInt("a_id"));
                    a.setNom(resultatRequete.getString("a_nom"));
+                   a.setPrenom(resultatRequete.getString("a_prenom"));
+                   
+                   Date date = resultatRequete.getDate("a_dateNaiss");
+                   a.setDateNaiss(date.toLocalDate());
                     
                    Pays p = new Pays();
                    p.setId(resultatRequete.getInt("p_id"));
                    p.setNom(resultatRequete.getString("p_nom"));
                 
-                    a.setPays(p);
+                   a.setPays(p);
                 
             }
            
