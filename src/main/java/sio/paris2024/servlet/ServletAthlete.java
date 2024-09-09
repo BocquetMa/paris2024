@@ -127,7 +127,7 @@ public class ServletAthlete extends HttpServlet {
             throws ServletException, IOException {
              
         
-         FormAthlete form = new FormAthlete();
+        FormAthlete form = new FormAthlete();
 		
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
         Athlete ath = form.ajouterAthlete(request);

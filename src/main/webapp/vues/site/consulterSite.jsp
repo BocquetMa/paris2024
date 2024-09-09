@@ -35,9 +35,13 @@
             </tr>
             <tr>
                 <td>
-                    <% for (Sport sp : s.getLesSports()) {%>
-                    <% out.println(sp.getId()); %> <% out.println(sp.getNom()); %>
-                    <% } %>
+                    <% if (s.getLesSports() != null && !s.getLesSports().isEmpty()) { %>
+    <% for (Sport sp : s.getLesSports()) { %>
+        <%= sp.getId() %> <%= sp.getNom() %>
+    <% } %>
+<% } else { %>
+    <p>Aucun sport disponible pour ce site.</p>
+<% } %>
                 </td>
             </tr>
         </table>

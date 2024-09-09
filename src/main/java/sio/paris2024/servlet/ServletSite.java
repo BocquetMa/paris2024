@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.util.ArrayList;
 import sio.paris2024.database.DaoSite;
+import sio.paris2024.form.FormSite;
 import sio.paris2024.model.Site;
 
 /**
@@ -86,6 +87,10 @@ public class ServletSite extends HttpServlet {
             //System.out.println("lister eleves - nombres d'élèves récupérés" + lesEleves.size() );
            getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp").forward(request, response);
         }
+        
+        else if(args[3].equals("ajouter")){
+            this.getServletContext().getRequestDispatcher("/vues/site/ajouterSite.jsp" ).forward( request, response );
+        }
     }
 
     /**
@@ -99,8 +104,30 @@ public class ServletSite extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         
+    
+    FormSite form = new FormSite();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Site sit = form.ajouterSite(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute( "form", form );
+        request.setAttribute( "pSite", sit );
+		
+        if (form.getErreurs().isEmpty()){
+            Site siteInsere =  DaoSite.addSite(cnx, sit);
+            if (siteInsere != null ){
+                request.setAttribute( "pAthlete", siteInsere );
+                this.getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp" ).forward( request, response );
+            }
+            else 
+            {
+                // Cas oùl'insertion en bdd a échoué
+                //renvoyer vers une page d'erreur 
+            }
+           
+        }
     }
 
     /**
