@@ -14,7 +14,7 @@ public class Site {
     private int id;
     private String nom ;
     private String ville ;
-    /*private ArrayList<Sport> lesSports ;*/
+    private ArrayList<Sport> lesSports ;
 
     public Site() {
     }
@@ -53,7 +53,7 @@ public class Site {
         this.ville = ville;
     }
 
-    /*public ArrayList<Sport> getLesSports() {
+    public ArrayList<Sport> getLesSports() {
         return lesSports;
     }
 
@@ -68,5 +68,5 @@ public class Site {
         }
         lesSports.add(s);
     }
-    */
+    
 }
