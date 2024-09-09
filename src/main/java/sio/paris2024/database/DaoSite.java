@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import sio.paris2024.model.Site;
-/*import sio.paris2024. model.Sport;*/
+import sio.paris2024. model.Sport;
 
 /**
  *
@@ -56,34 +56,34 @@ public class DaoSite {
         return lesSites;
     }
     
-   /* 
-    public static ArrayList<Sport> getSportsBySiteId(Connection cnx, int idSport){
+   
+    public static ArrayList<Sport> getLesSportsBySite(Connection cnx, int idSport){
         
         ArrayList<Sport> lesSports = new ArrayList<Sport>();
-        Sport sp = null;
+        Sport s = null;
         
         try{
-            requeteSql = cnx.prepareStatement("SELECT sport.id AS sp_id, sport.nom AS sp_nom FROM sport WHERE sport.site_id = ?;");
+            requeteSql = cnx.prepareStatement ("SELECT sport.id AS s_id, sport.nom AS s_nom FROM sport INNER JOIN site ON site.id = sport.site_id WHERE sport.site_id = ?;");
             requeteSql.setInt(1, idSport);
             resultatRequete = requeteSql.executeQuery();
         
         while (resultatRequete.next()){
             
-            sp = new Sport();
-                sp.setId(resultatRequete.getInt("sp_id"));
-                sp.setNom(resultatRequete.getString("sp_nom"));
-            
-                lesSports.add(sp);
-        }
+            s = new Sport();
+            s.setId(resultatRequete.getInt("s_id"));
+            s.setNom(resultatRequete.getString("s_nom"));
+           
+            lesSports.add(s);
+            }
         }
         
         
         catch (SQLException e){
             e.printStackTrace();
-            System.out.println("La requête de getPompierByCaserneId  a généré une erreur");
+            System.out.println("La requête de getLesSportsBySite a généré une erreur");
         }
         return lesSports;
-    }*/
+    }
     
     public static Site getSiteById(Connection cnx, int idSite){
         
@@ -104,15 +104,15 @@ public class DaoSite {
                     s.setNom(resultatRequete.getString("s_nom"));
                     s.setVille(resultatRequete.getString("s_ville"));
                     
-                    /*ArrayList<Sport> lesSports = DaoSite.getSportsBySiteId(cnx, idSite);
-                    s.setLesPompiers(lesSports);*/
+                    ArrayList<Sport> lesSports = DaoSite.getLesSportsBySite(cnx, idSite);
+                    s.setLesSports(lesSports);
                     
             }
            
         }
         catch (SQLException e){
             e.printStackTrace();
-            System.out.println("La requête de getCaserneById a généré une erreur");
+            System.out.println("La requête de getSiteById a généré une erreur");
         }
         return s ;
     }

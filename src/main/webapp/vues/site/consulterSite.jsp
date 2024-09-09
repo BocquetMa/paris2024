@@ -5,6 +5,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sio.paris2024.model.Site"%>
+<%@page import="sio.paris2024.model.Sport"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +19,7 @@
     </head>
     <body>
         <%
-                Site s = (Site)request.getAttribute("sSite");
+                Site s = (Site)request.getAttribute("pSite");
         %>
        
         
@@ -30,7 +31,14 @@
                 <td>Id: </td><td><%  out.println(s.getId());%></td>
             </tr>
             <tr>
-                <td>Vile : </td><td><%  out.println(s.getVille());%></td>
+                <td>Ville : </td><td><%  out.println(s.getVille());%></td>
+            </tr>
+            <tr>
+                <td>
+                    <% for (Sport sp : s.getLesSports()) {%>
+                    <% out.println(sp.getId()); %> <% out.println(sp.getNom()); %>
+                    <% } %>
+                </td>
             </tr>
         </table>
 </html>
