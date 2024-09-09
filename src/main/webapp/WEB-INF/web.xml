@@ -28,6 +28,10 @@
         <url-pattern>/ServletSite/consulter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletSite</servlet-name>
+        <url-pattern>/ServletSite/ajouter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletAthlete</servlet-name>
         <url-pattern>/ServletAthlete/lister</url-pattern>
     </servlet-mapping>
