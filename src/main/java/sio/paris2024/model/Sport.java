@@ -43,7 +43,7 @@ public class Sport {
         this.nom = nom;
     }
 
-    public ArrayList<Athlete> getLesAthletes() {
+    /*public ArrayList<Athlete> getLesAthletes() {
         return lesAthletes;
     }
 
@@ -57,6 +57,6 @@ public class Sport {
             lesAthletes = new ArrayList<Athlete>();
         }
         lesAthletes.add(a);
-    }
+    */
     
 }
