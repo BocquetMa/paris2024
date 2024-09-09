@@ -10,22 +10,20 @@ import java.util.ArrayList;
  *
  * @author zakina
  */
-public class Site {
+public class Sport {
     private int id;
     private String nom ;
-    private String ville ;
-    private ArrayList<Sport> lesSports ;
+    private ArrayList<Athlete> lesAthletes ;
 
-    public Site() {
+    public Sport() {
     }
 
-    public Site(int id, String nom, String ville) {
+    public Sport(int id, String nom) {
         this.id = id;
         this.nom = nom;
-        this.ville = ville;
     }
 
-    public Site(int id) {
+    public Sport(int id) {
         this.id = id;
     }
     
@@ -44,29 +42,21 @@ public class Site {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    public String getVille() {
-        return ville;
+
+    /*public ArrayList<Athlete> getLesAthletes() {
+        return lesAthletes;
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public ArrayList<Sport> getLesSports() {
-        return lesSports;
-    }
-
-    public void setLesSports(ArrayList<Sport> lesSports) {
-        this.lesSports = lesSports;
+    public void setLesAthletes(ArrayList<Athlete> lesAthletes) {
+        this.lesAthletes = lesAthletes;
     }
     
-    public void addSport(Sport s){
+    public void addAthlete(Athlete a){
         
-        if (lesSports == null){
-            lesSports = new ArrayList<Sport>();
+        if (lesAthletes == null){
+            lesAthletes = new ArrayList<Athlete>();
         }
-        lesSports.add(s);
-    }
+        lesAthletes.add(a);
+    */
     
 }
