@@ -81,10 +81,10 @@ public class ServletSite extends HttpServlet {
         
         else if(args[3].equals("consulter")){
             int idSite = Integer.parseInt((String)request.getParameter("idSite"));
-            System.out.println("Site à afficher = " + idSite);
             Site s = DaoSite.getSiteById(cnx, idSite);
-            request.setAttribute("sSport", s);
-            getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp").forward(request, response);
+            request.setAttribute("pSite", s);
+            //System.out.println("lister eleves - nombres d'élèves récupérés" + lesEleves.size() );
+           getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp").forward(request, response);
         }
     }
 
