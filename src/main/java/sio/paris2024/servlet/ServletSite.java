@@ -76,7 +76,7 @@ public class ServletSite extends HttpServlet {
         if(args[3].equals("lister")){
             ArrayList<Site> lesSites = DaoSite.getLesSites(cnx);
             request.setAttribute("sLesSites", lesSites);
-            getServletContext().getRequestDispatcher("/vue/site/listerSites.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/vues/site/listerSites.jsp").forward(request, response);
         }
         
         else if(args[3].equals("consulter")){
@@ -84,7 +84,7 @@ public class ServletSite extends HttpServlet {
             System.out.println("Site à afficher = " + idSite);
             Site s = DaoSite.getSiteById(cnx, idSite);
             request.setAttribute("sSport", s);
-            getServletContext().getRequestDispatcher("/vues/caserne/consulterSite.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp").forward(request, response);
         }
     }
 
