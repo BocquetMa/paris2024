@@ -14,21 +14,30 @@ public class Site {
     private int id;
     private String nom ;
     private String ville ;
+    private String image ;
     private ArrayList<Sport> lesSports ;
 
     public Site() {
     }
 
-    public Site(int id, String nom, String ville) {
+    public Site(int id, String nom, String ville, String image) {
         this.id = id;
         this.nom = nom;
         this.ville = ville;
+        this.image = image;
     }
 
     public Site(int id) {
         this.id = id;
     }
     
+    public String getImage(){
+        return image;
+    }
+    
+    public void setImage(String image){
+        this.image = image;
+    }
     public int getId() {
         return id;
     }
