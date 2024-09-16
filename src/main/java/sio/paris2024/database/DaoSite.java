@@ -34,7 +34,8 @@ public class DaoSite {
         try{
             requeteSql = cnx.prepareStatement("SELECT site.id AS s_id,"
                     + " site.nom AS s_nom,"
-                    + " site.ville AS s_ville"
+                    + " site.ville AS s_ville,"
+                    + " site.image AS s_image"
                     + " FROM site;");
             resultatRequete = requeteSql.executeQuery();
             
@@ -44,6 +45,7 @@ public class DaoSite {
                     s.setId(resultatRequete.getInt("s_id"));
                     s.setNom(resultatRequete.getString("s_nom"));
                     s.setVille(resultatRequete.getString("s_ville"));
+                    s.setImage(resultatRequete.getString("s_image"));
                      
                 lesSites.add(s);
             }
@@ -91,7 +93,8 @@ public class DaoSite {
         try{
             requeteSql = cnx.prepareStatement("SELECT site.id AS s_id,"
                 + " site.nom AS s_nom,"
-                + " site.ville AS s_ville"
+                + " site.ville AS s_ville,"
+                + " site.image AS s_image"
                 + " FROM site"
                 + " WHERE site.id = ?;");
             requeteSql.setInt(1, idSite);
@@ -103,6 +106,7 @@ public class DaoSite {
                     s.setId(resultatRequete.getInt("s_id"));
                     s.setNom(resultatRequete.getString("s_nom"));
                     s.setVille(resultatRequete.getString("s_ville"));
+                    s.setImage(resultatRequete.getString("s_image"));
                     
                     ArrayList<Sport> lesSports = DaoSite.getLesSportsBySite(cnx, idSite);
                     s.setLesSports(lesSports);
@@ -117,39 +121,29 @@ public class DaoSite {
         return s ;
     }
     
-    public static Site addSite(Connection connection, Site sit){      
+    public static Site addSite(Connection connection, Site sit) {      
         int idGenere = -1;
-        try
-        {
-            //preparation de la requete
-            // id (clé primaire de la table athlete) est en auto_increment,donc on ne renseigne pas cette valeur
-            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
-            // supprimer ce paramètre en cas de requête sans auto_increment.
-            requeteSql=connection.prepareStatement("INSERT INTO site (nom, ville)\n" +
-                    " VALUES (?,?)", requeteSql.RETURN_GENERATED_KEYS );
+            try {
+        // Préparation de la requête
+            requeteSql = connection.prepareStatement("INSERT INTO site (nom, ville, image) VALUES (?, ?, ?)", requeteSql.RETURN_GENERATED_KEYS);
             requeteSql.setString(1, sit.getNom());      
             requeteSql.setString(2, sit.getVille());
-
-           /* Exécution de la requête */
+            requeteSql.setString(3, sit.getImage());
+        
+        // Exécution de la requête
             requeteSql.executeUpdate();
-            
-             // Récupération de id auto-généré par la bdd dans la table client
+        
+        // Récupération de l'id auto-généré
             resultatRequete = requeteSql.getGeneratedKeys();
-            while ( resultatRequete.next() ) {
-                idGenere = resultatRequete.getInt( 1 );
-                sit.setId(idGenere);
-                
-                sit = DaoSite.getSiteById(connection, sit.getId());
-            }
-            
-         
-        }   
-        catch (SQLException e) 
-        {
-            e.printStackTrace();
-            //out.println("Erreur lors de l’établissement de la connexion");
+        if (resultatRequete.next()) {
+            idGenere = resultatRequete.getInt(1);
+            sit.setId(idGenere);
+            sit = getSiteById(connection, sit.getId());
         }
-        return sit ;    
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return sit;    
+}
     
 }
