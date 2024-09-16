@@ -14,15 +14,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>paris 2024</title>
+        <script>
+            /* Cette fonction permet d'afficher une vignette pour chaque image sélectionnée */
+            function readFilesAndDisplayPreview(files) {
+                let imageList = document.querySelector('#list'); 
+                imageList.innerHTML = "";
+                
+                for ( let file of files ) {
+                    let reader = new FileReader();
+                    
+                    reader.addEventListener( "load", function( event ) {
+                        let span = document.createElement('span');
+                        span.innerHTML = '<img height="60" src="' + event.target.result + '" />';
+                        imageList.appendChild( span );
+                    });
+
+                    reader.readAsDataURL( file );
+                }
+            }
+        </script>
     </head>
     <body>
         <h1>NOUVEL ATHLETE</h1>
         
-            <%
-                FormAthlete form = (FormAthlete)request.getAttribute("form");
-            %>
+    
         
-        <form class="form-inline" action="ajouter" method="POST">
+        <form class="form-inline" action="ajouter" method="POST" enctype="multipart/form-data">
                 <label for="nom">NOM : </label>
                 <input id="nom" type="text" name="nom"  size="30" maxlength="30">
                 </br>
@@ -38,7 +55,10 @@
                         }
                     %>
                 </select>
-                </br>            
+                </br>   
+                
+            <label for="fichier">Fichier à envoyer : </label>
+            <input type="file" name="fichier" id="fichier" />
                                
             <input type="submit" name="valider" id="valider" value="Valider"/>
             </form>
