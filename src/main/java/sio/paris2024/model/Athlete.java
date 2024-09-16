@@ -15,23 +15,33 @@ public class Athlete {
     private int id;
     private String nom ;
     private String prenom ;
+    private String image;
     private LocalDate dateNaiss ;
     private Pays pays ;
     
     public Athlete() {
     }
 
-    public Athlete(int id, String nom, String prenom, LocalDate dateNaiss) {
+    public Athlete(int id, String nom, String prenom, String image, LocalDate dateNaiss) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+        this.image = image;
         this.dateNaiss = dateNaiss;
     }
 
     public int getId() {
         return id;
     }
+    
+    public String getImage(){
+        return image;
+    }
 
+    public void setImage(String image){
+        this.image = image;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
