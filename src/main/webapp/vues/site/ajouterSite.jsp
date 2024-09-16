@@ -13,29 +13,47 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>paris 2024</title>
+        <script>
+            /* Cette fonction permet d'afficher une vignette pour chaque image sélectionnée */
+            function readFilesAndDisplayPreview(files) {
+                let imageList = document.querySelector('#list'); 
+                imageList.innerHTML = "";
+                
+                for ( let file of files ) {
+                    let reader = new FileReader();
+                    
+                    reader.addEventListener( "load", function( event ) {
+                        let span = document.createElement('span');
+                        span.innerHTML = '<img height="60" src="' + event.target.result + '" />';
+                        imageList.appendChild( span );
+                    });
+
+                    reader.readAsDataURL( file );
+                }
+            }
+        </script>
     </head>
     <body>
-        <h1>NOUVEAU SITE</h1>
         
-            <%
-                FormSite form = (FormSite)request.getAttribute("form");
-            %>
+    <form method="post" action="ajouter" enctype="multipart/form-data">
         
-        <form class="form-inline" action="ajouter" method="POST">
-                <label for="nom">NOM : </label>
-                <input id="nom" type="text" name="nom"  size="30" maxlength="30">
-                </br>
-                            
-                <%-- Champ Liste des pays --%>
-                <label for="ville">Ville : </label>
-                <input id="ville" type="text" name="ville"  size="30" maxlength="30">
-                </br>            
-                               
-            <input type="submit" name="valider" id="valider" value="Valider"/>
-            </form>
+        <p>
+            <label for="nom">NOM : </label>
+            <input id="nom" type="text" name="nom"  size="30" maxlength="30">
         
+        </p>
+        <p>
+            <label for="ville">VILLE : </label>
+            <input id="ville" type="text" name="ville"  size="30" maxlength="30">
         
+        </p>
+        <p>
+            <label for="fichier">Fichier à envoyer : </label>
+            <input type="file" name="fichier" id="fichier" />
+        </p>
         
-        
-    </body>
+        <input type="submit" />
+    </form>
+    
+</body>
 </html>
