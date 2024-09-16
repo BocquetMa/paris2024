@@ -23,9 +23,9 @@
             margin-bottom: 30px;
         }
         .site-image {
-            width: 150px;
+            width: 220px;
             height: 150px;
-            border-radius: 50%;
+            border-radius: 10%;
             object-fit: cover;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -54,7 +54,8 @@
     </div>
 </nav>
 <div class="container special">
-    <h2 class="text-center">Liste des sites</h2>
+    <h1 class="text-center"><strong>Liste des sites</strong></h1>
+    <br><br>
     <div class="row">
         <%
             ArrayList<Site> lesSites = (ArrayList)request.getAttribute("sLesSites");
@@ -74,6 +75,7 @@
                 <a href="../ServletSite/consulter?idSite=<%= s.getId() %>" target="_blank">
                     <img src="<%= imageUrl %>" alt="Image de <%= s.getNom() %>" class="site-image" />
                 </a>
+                
                 <div class="site-name"><%= s.getNom() %></div>
                 <div class="site-city"><%= s.getVille() %></div>
             </div>
