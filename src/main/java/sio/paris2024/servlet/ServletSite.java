@@ -26,7 +26,9 @@ public class ServletSite extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
     public static final int TAILLE_TAMPON = 10240;
-    public static final String CHEMIN_FICHIERS = "C:/projet/paris2024/src/main/webapp/vues/image/";
+
+    public static final String CHEMIN_FICHIERS = "E:/Bocquet/paris2024/src/main/webapp/vues/image/";
+
     
     public ServletSite(){
         super();
@@ -66,59 +68,36 @@ public class ServletSite extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*FormSite form = new FormSite();
 
-        // Traitement et validation du formulaire
-        Site sit = form.ajouterSite(request);
+        FormSite form = new FormSite();
+    Site sit = form.ajouterSite(request);
 
-        // Gestion du téléchargement du fichier
-        Part filePart = request.getPart("imageFile"); // Nom de l'input dans le formulaire HTML
-        if (filePart != null && filePart.getSize() > 0) {
-            String fileName = getFileName(filePart);
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "/vues/image";
-
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            try (OutputStream out = new FileOutputStream(new File(uploadPath, fileName))) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = filePart.getInputStream().read(buffer)) != -1) {
-                    out.write(buffer, 0, bytesRead);
-                }
-            }
-            // Assigner le nom du fichier image à l'objet Site ou à la base de données
-            sit.setImage(fileName);
-        }
-
-        request.setAttribute("form", form);
-        request.setAttribute("pSite", sit);
-
-        if (form.getErreurs().isEmpty()) {
-            Site siteInsere = DaoSite.addSite(cnx, sit);
-            if (siteInsere != null) {
-                request.setAttribute("pSite", siteInsere);
-                this.getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp").forward(request, response);
-            } else {
-                // Cas où l'insertion en BDD a échoué
-                response.sendRedirect("erreur.jsp");
-            }
-        } else {
-            this.getServletContext().getRequestDispatcher("/vues/site/ajouterSite.jsp").forward(request, response);
-        }
+    Part filePart = request.getPart("fichier"); // Nom du champ dans le formulaire HTML
+    if (filePart != null && filePart.getSize() > 0) {
+        String fileName = getNomFichier(filePart);
+        fileName = fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1);
+        
+        ecrireFichier(filePart, fileName, CHEMIN_FICHIERS);
+        
+        sit.setImage(fileName); // Assigner le nom du fichier à l'objet Site
     }
 
-    private String getFileName(Part part) {
-        String contentDisposition = part.getHeader("Content-Disposition");
-        for (String content : contentDisposition.split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-            }
+    request.setAttribute("form", form);
+    request.setAttribute("pSite", sit);
+
+    if (form.getErreurs().isEmpty()) {
+        Site siteInsere = DaoSite.addSite(cnx, sit);
+        if (siteInsere != null) {
+            request.setAttribute("pSite", siteInsere);
+            this.getServletContext().getRequestDispatcher("/vues/site/consulterSite.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("erreur.jsp");
         }
-        return null;
-    } */
+    } else {
+        this.getServletContext().getRequestDispatcher("/vues/site/ajouterSite.jsp").forward(request, response);
+    }
+        
+
         
         String description = request.getParameter("description");
         request.setAttribute("description", description);
@@ -149,12 +128,14 @@ public class ServletSite extends HttpServlet {
             int longueur;
             while ((longueur = entree.read(tampon)) > 0) {
                 sortie.write(tampon, 0, longueur);
+
             }
         } finally {
             try {
                 sortie.close();
             } catch (IOException ignore) {
             }
+
             try {
                 entree.close();
             } catch (IOException ignore) {
@@ -177,4 +158,6 @@ public class ServletSite extends HttpServlet {
     public String getServletInfo() {
         return "Servlet for managing site information and image uploads";
     }
+
 }
+

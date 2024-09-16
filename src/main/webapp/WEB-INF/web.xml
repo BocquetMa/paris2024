@@ -11,7 +11,8 @@
         <servlet-name>ServletSite</servlet-name>
         <servlet-class>sio.paris2024.servlet.ServletSite</servlet-class>
         <multipart-config>
-            <location>C:/projet/paris2024/src/main/webapp/vues/image/</location>
+            <location>E:/Bocquet/paris2024/src/main/webapp/vues/image/</location>
+
             <max-file-size>10485760</max-file-size>
             <max-request-size>52428800</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>

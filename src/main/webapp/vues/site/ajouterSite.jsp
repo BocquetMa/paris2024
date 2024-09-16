@@ -34,11 +34,19 @@
         </script>
     </head>
     <body>
-    <c:if test="${ !empty fichier }"><p><c:out value="Le fichier ${ fichier } (${ description }) a été uploadé !" /></p></c:if>
+        
     <form method="post" action="ajouter" enctype="multipart/form-data">
+        
         <p>
-            <label for="description">Description du fichier : </label>
-            <input type="text" name="description" id="description" />
+            <label for="nom">NOM : </label>
+            <input id="nom" type="text" name="nom"  size="30" maxlength="30">
+        
+        </p>
+        <p>
+            <label for="ville">VILLE : </label>
+            <input id="ville" type="text" name="ville"  size="30" maxlength="30">
+        
+
         </p>
         <p>
             <label for="fichier">Fichier à envoyer : </label>
