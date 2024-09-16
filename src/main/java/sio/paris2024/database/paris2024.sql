@@ -95,6 +95,7 @@ ALTER TABLE `athlete`
 ALTER TABLE `pays`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+
 --
 -- Contraintes pour les tables déchargées
 --

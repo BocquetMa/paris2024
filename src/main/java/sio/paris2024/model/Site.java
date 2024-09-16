@@ -14,7 +14,9 @@ public class Site {
     private int id;
     private String nom ;
     private String ville ;
-    private String image;
+
+    private String image ;
+
     private ArrayList<Sport> lesSports ;
 
     public Site() {
@@ -31,6 +33,13 @@ public class Site {
         this.id = id;
     }
     
+    public String getImage(){
+        return image;
+    }
+    
+    public void setImage(String image){
+        this.image = image;
+    }
     public int getId() {
         return id;
     }

@@ -46,6 +46,7 @@
             <label for="ville">VILLE : </label>
             <input id="ville" type="text" name="ville"  size="30" maxlength="30">
         
+
         </p>
         <p>
             <label for="fichier">Fichier à envoyer : </label>

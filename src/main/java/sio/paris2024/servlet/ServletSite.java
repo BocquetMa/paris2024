@@ -26,7 +26,9 @@ public class ServletSite extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
     public static final int TAILLE_TAMPON = 10240;
+
     public static final String CHEMIN_FICHIERS = "E:/Bocquet/paris2024/src/main/webapp/vues/image/";
+
     
     public ServletSite(){
         super();
@@ -66,6 +68,7 @@ public class ServletSite extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         FormSite form = new FormSite();
     Site sit = form.ajouterSite(request);
 
@@ -94,6 +97,7 @@ public class ServletSite extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/vues/site/ajouterSite.jsp").forward(request, response);
     }
         
+
         
         String description = request.getParameter("description");
         request.setAttribute("description", description);
@@ -124,12 +128,14 @@ public class ServletSite extends HttpServlet {
             int longueur;
             while ((longueur = entree.read(tampon)) > 0) {
                 sortie.write(tampon, 0, longueur);
+
             }
         } finally {
             try {
                 sortie.close();
             } catch (IOException ignore) {
             }
+
             try {
                 entree.close();
             } catch (IOException ignore) {
@@ -152,4 +158,6 @@ public class ServletSite extends HttpServlet {
     public String getServletInfo() {
         return "Servlet for managing site information and image uploads";
     }
+
 }
+
