@@ -27,7 +27,7 @@ public class DaoAthlete {
         
         ArrayList<Athlete> lesAthletes = new ArrayList<Athlete>();
         try{
-            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_dateNaiss,  p.id as p_id, p.nom as p_nom " +
+            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_dateNaiss,  p.id as p_id, p.nom as p_nom, a.image as a_image " +
                          " from athlete a inner join pays p " +
                          " on a.pays_id = p.id ");
             //System.out.println("REQ="+ requeteSql);
@@ -41,11 +41,19 @@ public class DaoAthlete {
                    a.setPrenom(resultatRequete.getString("a_prenom"));
                    
                    Date date = resultatRequete.getDate("a_dateNaiss");
-                   a.setDateNaiss(date.toLocalDate());
+            if (date != null) {
+                a.setDateNaiss(date.toLocalDate());
+            } else {
+                
+                a.setDateNaiss(null);
+            }
+
                     
                    Pays p = new Pays();
                    p.setId(resultatRequete.getInt("p_id"));
                    p.setNom(resultatRequete.getString("p_nom"));
+                   
+                   a.setImage(resultatRequete.getString("a_image"));
                 
                     a.setPays(p);
                 
@@ -64,7 +72,7 @@ public class DaoAthlete {
         
         Athlete a = new Athlete();
         try{
-            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_dateNaiss,  p.id as p_id, p.nom as p_nom " +
+            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_dateNaiss,  p.id as p_id, p.nom as p_nom, a.image as a_image " +
                          " from athlete a inner join pays p " +
                          " on a.pays_id = p.id " + 
                          " where a.id = ? ");
@@ -79,11 +87,19 @@ public class DaoAthlete {
                    a.setPrenom(resultatRequete.getString("a_prenom"));
                    
                    Date date = resultatRequete.getDate("a_dateNaiss");
-                   a.setDateNaiss(date.toLocalDate());
+            if (date != null) {
+                a.setDateNaiss(date.toLocalDate());
+            } else {
+               
+                a.setDateNaiss(null);
+            }
+
                     
                    Pays p = new Pays();
                    p.setId(resultatRequete.getInt("p_id"));
                    p.setNom(resultatRequete.getString("p_nom"));
+                   
+                   a.setImage(resultatRequete.getString("a_image"));
                 
                    a.setPays(p);
                 
@@ -105,10 +121,11 @@ public class DaoAthlete {
             // id (clé primaire de la table athlete) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requeteSql=connection.prepareStatement("INSERT INTO athlete (nom, pays_id)\n" +
-                    "VALUES (?,?)", requeteSql.RETURN_GENERATED_KEYS );
+            requeteSql=connection.prepareStatement("INSERT INTO athlete (nom, pays_id, image)\n" +
+                    "VALUES (?,?,?)", requeteSql.RETURN_GENERATED_KEYS );
             requeteSql.setString(1, ath.getNom());      
             requeteSql.setInt(2, ath.getPays().getId());
+            requeteSql.setString(3, ath.getImage());
 
            /* Exécution de la requête */
             requeteSql.executeUpdate();
@@ -116,13 +133,11 @@ public class DaoAthlete {
              // Récupération de id auto-généré par la bdd dans la table client
             resultatRequete = requeteSql.getGeneratedKeys();
             while ( resultatRequete.next() ) {
-                idGenere = resultatRequete.getInt( 1 );
+                idGenere = resultatRequete.getInt(1);
                 ath.setId(idGenere);
                 
                 ath = DaoAthlete.getAthleteById(connection, ath.getId());
-            }
-            
-         
+            } 
         }   
         catch (SQLException e) 
         {

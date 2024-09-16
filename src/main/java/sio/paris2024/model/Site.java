@@ -48,13 +48,6 @@ public class Site {
         this.id = id;
     }
 
-    public String getImage(){
-        return image;
-    }
-    
-    public void setImage(String image){
-        this.image = image;
-    }
     
     public String getNom() {
         return nom;
