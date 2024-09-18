@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sio.paris2024.model;
 
 import java.util.ArrayList;
@@ -12,8 +8,8 @@ import java.util.ArrayList;
  */
 public class Sport {
     private int id;
-    private String nom ;
-    private ArrayList<Athlete> lesAthletes ;
+    private String nom;
+    private ArrayList<Epreuve> lesEpreuves;
 
     public Sport() {
     }
@@ -21,12 +17,14 @@ public class Sport {
     public Sport(int id, String nom) {
         this.id = id;
         this.nom = nom;
+        this.lesEpreuves = new ArrayList<>();
     }
 
     public Sport(int id) {
         this.id = id;
+        this.lesEpreuves = new ArrayList<>();
     }
-    
+
     public int getId() {
         return id;
     }
@@ -43,20 +41,19 @@ public class Sport {
         this.nom = nom;
     }
 
-    /*public ArrayList<Athlete> getLesAthletes() {
-        return lesAthletes;
+    public ArrayList<Epreuve> getLesEpreuves() {
+        return lesEpreuves;
     }
 
-    public void setLesAthletes(ArrayList<Athlete> lesAthletes) {
-        this.lesAthletes = lesAthletes;
+    public void setLesEpreuves(ArrayList<Epreuve> lesEpreuves) {
+        this.lesEpreuves = lesEpreuves;
     }
     
-    public void addAthlete(Athlete a){
-        
-        if (lesAthletes == null){
-            lesAthletes = new ArrayList<Athlete>();
+    public void addEpreuve(Epreuve e) {
+        if (lesEpreuves == null) {
+            lesEpreuves = new ArrayList<>();
         }
-        lesAthletes.add(a);
-    */
-    
+        lesEpreuves.add(e);
+    }
+
 }
