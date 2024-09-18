@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="sio.paris2024.model.Site" %>
 <%@ page import="sio.paris2024.model.Sport" %>
+<%@ page import="sio.paris2024.model.Epreuve" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,15 +88,17 @@
         <table>
             
             <tr>
-                <td>
+                <td>  
                     <% if (s.getLesSports() != null && !s.getLesSports().isEmpty()) { %>
                         <% for (Sport sp : s.getLesSports()) { %>
+                        <a href="../ServletSport/consulter?idSport=<%= sp.getId() %>" target="_blank">
                             <%= sp.getId() %> <%= sp.getNom() %><br>
-                        <% } %>
+                        <% } %></a>
                     <% } else { %>
                         Aucun sport disponible pour ce site.
                     <% } %>
-                </td>
+                    </td>
+                
             </tr>
         </table>
     <%
