@@ -78,6 +78,12 @@ public class ServletSport extends HttpServlet {
             request.setAttribute("sLesSports", lesSports);
             getServletContext().getRequestDispatcher("/vues/sport/listerSports.jsp").forward(request, response);
         }
+        else if (args[3].equals("consulter")) {
+            int idSport = Integer.parseInt(request.getParameter("idSport"));
+            Sport s = DaoSport.getSportById(cnx, idSport);
+            request.setAttribute("pSport", s);
+            getServletContext().getRequestDispatcher("/vues/sport/consulterSport.jsp").forward(request, response);
+        }
     }
 
     /**

@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import sio.paris2024.model.Site;
 import sio.paris2024. model.Sport;
+import sio.paris2024. model.Epreuve;
 
 /**
  *
@@ -79,7 +80,7 @@ public class DaoSite {
             }
         }
         
-        
+         
         catch (SQLException e){
             e.printStackTrace();
             System.out.println("La requête de getLesSportsBySite a généré une erreur");
@@ -110,6 +111,7 @@ public class DaoSite {
                     
                     ArrayList<Sport> lesSports = DaoSite.getLesSportsBySite(cnx, idSite);
                     s.setLesSports(lesSports);
+                    
                     
             }
            
