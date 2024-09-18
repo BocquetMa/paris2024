@@ -18,6 +18,7 @@ public class Site {
     private String image ;
 
     private ArrayList<Sport> lesSports ;
+    private ArrayList<Epreuve> lesEpreuves ;
 
     public Site() {
     }
@@ -79,6 +80,22 @@ public class Site {
             lesSports = new ArrayList<Sport>();
         }
         lesSports.add(s);
+    }
+    
+    public ArrayList<Epreuve> getLesEpreuves() {
+        return lesEpreuves;
+    }
+
+    public void setLesEpreuves(ArrayList<Epreuve> lesEpreuves) {
+        this.lesEpreuves = lesEpreuves;
+    }
+    
+    public void addEpreuve(Epreuve e){
+        
+        if (lesEpreuves == null){
+            lesEpreuves = new ArrayList<Epreuve>();
+        }
+        lesEpreuves.add(e);
     }
     
 }
