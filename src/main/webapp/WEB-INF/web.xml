@@ -33,6 +33,10 @@
         <url-pattern>/ServletSport/lister</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletSport</servlet-name>
+        <url-pattern>/ServletSport/consulter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletSite</servlet-name>
         <url-pattern>/ServletSite/lister</url-pattern>
     </servlet-mapping>
